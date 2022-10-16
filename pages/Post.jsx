@@ -6,7 +6,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 export default function Post() {
   const [user, loading] = useAuthState(auth);
-
+  const route = useRouter();
   // Form state
   const [post, setPost] = useState({ description: "" });
 
@@ -23,6 +23,8 @@ export default function Post() {
       avatar: user.photoURL,
       userName: user.displayName,
     });
+    setPost({ description: "" });
+    return route.push("/");
   };
 
   return (
