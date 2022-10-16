@@ -23,7 +23,6 @@ export default function Login() {
   useEffect(() => {
     if (user) {
       route.push("/");
-      console.log("Logged In");
     } else {
       console.log("Login");
     }

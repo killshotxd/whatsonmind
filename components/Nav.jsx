@@ -1,17 +1,34 @@
 import Link from "next/link";
-
+import { auth } from "../utils/Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 export default function Nav() {
+  const [user, loading] = useAuthState(auth);
+  console.log(user);
   return (
     <nav className="flex justify-between items-center py-10">
       <Link href="/">
         <button className="text-lg font-medium">What's on your Mind?</button>
       </Link>
       <ul className="flex items-center gap-10">
-        <Link href="/auth/Login">
-          <a className="py-2 px-4 text-sm bg-cyan-500 text-white rounded-lg font-medium ml-8">
-            Join Now
-          </a>
-        </Link>
+        {!user && (
+          <Link href="/auth/Login">
+            <a className="py-2 px-4 text-sm bg-cyan-500 text-white rounded-lg font-medium ml-8">
+              Join Now
+            </a>
+          </Link>
+        )}
+        {user && (
+          <div className="flex items-center gap-6">
+            <Link href="/post">
+              <button className="font-medium bg-cyan-500 text-white py-2 px-4 rounded-md text-sm">
+                Post
+              </button>
+            </Link>
+            <Link href="/dashboard">
+              <h1>Dashboard</h1>
+            </Link>
+          </div>
+        )}
       </ul>
     </nav>
   );
