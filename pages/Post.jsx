@@ -1,17 +1,28 @@
-import { auth } from "../utils/Firebase";
+import { auth, db } from "../utils/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 export default function Post() {
-  // Form state
+  const [user, loading] = useAuthState(auth);
 
+  // Form state
   const [post, setPost] = useState({ description: "" });
 
   //   Submit
-
   const submitPost = async (e) => {
     e.preventDefault();
+    // New post
+
+    const collectionRef = collection(db, "posts");
+    await addDoc(collectionRef, {
+      ...post,
+      timeStamp: serverTimestamp(),
+      user: user.uid,
+      avatar: user.photoURL,
+      userName: user.displayName,
+    });
   };
 
   return (
@@ -25,7 +36,13 @@ export default function Post() {
             onChange={(e) => setPost({ ...post, description: e.target.value })}
             className="bg-gray-800 h-48 w-full text-white rounded-lg p-2 text-sm"
           ></textarea>
-          <p>{post.description.length}/300</p>
+          <p
+            className={`text-cyan-600 font-medium text-sm ${
+              post.description.length > 300 ? "text-red-600" : ""
+            }`}
+          >
+            {post.description.length}/300
+          </p>
         </div>
         <button
           type="submit"
