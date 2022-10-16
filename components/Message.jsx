@@ -1,14 +1,16 @@
-export default function Message({ children }) {
+export default function Message({ children, avatar, userName, description }) {
   return (
     <div className="bg-white p-8 border-b-2 rounded-lg">
       <div className="flex items-center">
-        <img src="" alt="" />
-        <h2>User</h2>
+        <img src={avatar} className="w-10 rounded-full" alt="avatar" />
+        <h2>{userName}</h2>
       </div>
       <div>
-        <p>Description</p>
+        <p>{description}</p>
       </div>
       {children}
     </div>
   );
 }
+
+// 1h36m
