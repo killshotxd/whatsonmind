@@ -43,7 +43,10 @@ export default function Post() {
       const docRef = doc(db, "posts", post.id);
       const updatedPost = { ...post, timeStamp: serverTimestamp() };
       await updateDoc(docRef, updatedPost);
-      toast.success("Post has been updated...😊");
+      toast.success("Post has been updated...😊", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
       return route.push("/");
     } else {
       // New post
@@ -56,7 +59,10 @@ export default function Post() {
         userName: user.displayName,
       });
       setPost({ description: "" });
-      toast.success("Post has been made...😉");
+      toast.success("Post has been made...😉", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
       return route.push("/");
     }
   };
