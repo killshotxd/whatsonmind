@@ -2,7 +2,13 @@ import { auth, db } from "../utils/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { toast, Toast } from "react-toastify";
 
 export default function Post() {
@@ -33,17 +39,24 @@ export default function Post() {
       return;
     }
 
-    // New post
-    const collectionRef = collection(db, "posts");
-    await addDoc(collectionRef, {
-      ...post,
-      timeStamp: serverTimestamp(),
-      user: user.uid,
-      avatar: user.photoURL,
-      userName: user.displayName,
-    });
-    setPost({ description: "" });
-    return route.push("/");
+    if (post?.hasOwnProperty("id")) {
+      const docRef = doc(db, "posts", post.id);
+      const updatedPost = { ...post, timeStamp: serverTimestamp() };
+      await updateDoc(docRef, updatedPost);
+      return route.push("/");
+    } else {
+      // New post
+      const collectionRef = collection(db, "posts");
+      await addDoc(collectionRef, {
+        ...post,
+        timeStamp: serverTimestamp(),
+        user: user.uid,
+        avatar: user.photoURL,
+        userName: user.displayName,
+      });
+      setPost({ description: "" });
+      return route.push("/");
+    }
   };
 
   // Edit User
