@@ -43,7 +43,9 @@ export default function Home() {
       </Head>
 
       <div className="my-12 text-lg font-medium">
-        <h2 className="text-2xl ">See what other people are saying</h2>
+        <h2 className="text-2xl font-semibold ">
+          See what other people are saying :
+        </h2>
         {!loading ? (
           allPosts.map((post) => (
             <Message key={post.id} {...post}>
