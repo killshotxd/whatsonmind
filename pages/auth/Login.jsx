@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../utils/Firebase";

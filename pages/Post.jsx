@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { auth, db } from "../utils/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";

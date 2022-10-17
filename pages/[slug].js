@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import Message from "../components/Message";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
