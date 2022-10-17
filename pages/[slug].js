@@ -9,9 +9,24 @@ export default function Details() {
   const routerData = router.query;
   const [message, setMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
+
   return (
     <div>
-      <h1>Hello</h1>
+      <Message {...routerData}></Message>
+      <div className="my-4">
+        <div className="flex">
+          <input
+            onChange={(e) => setMessage(e.target.value)}
+            type="text"
+            value={message}
+            placeholder="Send a message 😁"
+            className="bg-gray-800 w-full p-2  text-white text-sm"
+          />
+          <button className="bg-cyan-500 text-white py-2 px-4 text-sm">
+            Submit
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
