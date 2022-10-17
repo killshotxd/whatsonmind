@@ -26,6 +26,16 @@ export default function Details() {
             Submit
           </button>
         </div>
+        <div className="py-6">
+          <h2 className="font-bold">Comments</h2>
+          {/* {setAllMessages?.map(message => (
+            <div>
+                <div>
+                    <img src="" alt="" />
+                </div>
+            </div>
+          ))} */}
+        </div>
       </div>
     </div>
   );
