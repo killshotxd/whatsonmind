@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { db } from "../utils/Firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
+import { BounceLoader } from "react-spinners";
 
 export default function Home() {
   // Create a state with all posts
   const [allPosts, setAllPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getPosts = async () => {
+    setLoading(true);
     const collectionRef = collection(db, "posts");
     const q = query(collectionRef, orderBy("timeStamp", "desc"));
     const unsubscribe = onSnapshot(
@@ -18,6 +21,7 @@ export default function Home() {
         setAllPosts(
           snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
+        setLoading(false);
       },
       (error) => {
         console.log(error);
@@ -40,15 +44,22 @@ export default function Home() {
 
       <div className="my-12 text-lg font-medium">
         <h2 className="text-2xl ">See what other people are saying</h2>
-        {allPosts.map((post) => (
-          <Message key={post.id} {...post}>
-            <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
-              <button>
-                {post.comments?.length > 0 ? post.comments?.length : 0} Comments
-              </button>
-            </Link>
-          </Message>
-        ))}
+        {!loading ? (
+          allPosts.map((post) => (
+            <Message key={post.id} {...post}>
+              <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
+                <button>
+                  {post.comments?.length > 0 ? post.comments?.length : 0}{" "}
+                  Comments
+                </button>
+              </Link>
+            </Message>
+          ))
+        ) : (
+          <div className="flex items-center justify-center mx-auto h-80">
+            <BounceLoader color="#06B6D4" />
+          </div>
+        )}
       </div>
     </div>
   );
