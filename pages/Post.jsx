@@ -8,6 +8,7 @@ import { toast, Toast } from "react-toastify";
 export default function Post() {
   const [user, loading] = useAuthState(auth);
   const route = useRouter();
+  const routeData = route.query;
   // Form state
   const [post, setPost] = useState({ description: "" });
 
@@ -45,10 +46,26 @@ export default function Post() {
     return route.push("/");
   };
 
+  // Edit User
+
+  const checkUser = async () => {
+    if (loading) return;
+    if (!user) route.push("/auth/Login");
+    if (routeData.id) {
+      setPost({ description: routeData.description, id: routeData.id });
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, [user, loading]);
+
   return (
     <div className="my-20 p-12 shadow-lg rounded-lg max-w-md mx-auto">
       <form onSubmit={submitPost}>
-        <h1 className="text-2xl font-bold">Create a new post</h1>
+        <h1 className="text-2xl font-bold">
+          {post.hasOwnProperty("id") ? "Edit your Post" : "Create a new Post"}
+        </h1>
         <div className="py-2">
           <h3 className=" text-lg font-medium py-2">Description</h3>
           <textarea
