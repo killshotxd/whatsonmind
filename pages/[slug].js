@@ -7,6 +7,7 @@ import { auth, db } from "../utils/Firebase";
 import { toast } from "react-toastify";
 import {
   arrayUnion,
+  deleteDoc,
   doc,
   getDoc,
   onSnapshot,
@@ -41,6 +42,7 @@ export default function Details({ timeStamp }) {
         avatar: auth.currentUser.photoURL,
         userName: auth.currentUser.displayName,
         time: Timestamp.now(),
+        id: auth.currentUser.uid + Math.floor(Math.random() * 90 + 10),
       }),
     });
     setMessage("");
@@ -64,6 +66,13 @@ export default function Details({ timeStamp }) {
   // var moments = new Date(time?.toDate()).toUTCString();
 
   // const time = moment.parseZone(moments).startOf("hour").fromNow();
+
+  // Deleting Comment
+
+  // const deleteComment = async (id) => {
+  //   const docRef = doc(db, "posts/comments", "", id);
+  //   await deleteDoc(docRef.id);
+  // };
 
   return (
     <div>
@@ -97,6 +106,7 @@ export default function Details({ timeStamp }) {
                 <h2>{message.userName}</h2>
               </div>
               <h2>{message.message}</h2>
+              {/* <button onClick={() => deleteComment(message.id)}>Delete</button> */}
             </div>
           ))}
         </div>
