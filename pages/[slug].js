@@ -13,6 +13,7 @@ import {
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
+import moment from "moment";
 
 export default function Details() {
   const router = useRouter();
@@ -56,6 +57,10 @@ export default function Details() {
     if (!router.isReady) return;
     getComments();
   }, [router.isReady]);
+
+  // var moments = new Date(time?.toDate()).toUTCString();
+
+  // const time = moment.parseZone(moments).startOf("hour").fromNow();
 
   return (
     <div>
