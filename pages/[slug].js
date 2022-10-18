@@ -10,14 +10,16 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  serverTimestamp,
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
 import moment from "moment";
 
-export default function Details() {
+export default function Details({ timeStamp }) {
   const router = useRouter();
   const routerData = router.query;
+
   const [message, setMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
 
@@ -38,10 +40,11 @@ export default function Details() {
         message,
         avatar: auth.currentUser.photoURL,
         userName: auth.currentUser.displayName,
-        time: Timestamp.now(),
+        time: serverTimestamp(),
       }),
     });
     setMessage("");
+    console.log(routerData);
   };
 
   //Get Comments
