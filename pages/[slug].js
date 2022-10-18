@@ -40,7 +40,7 @@ export default function Details({ timeStamp }) {
         message,
         avatar: auth.currentUser.photoURL,
         userName: auth.currentUser.displayName,
-        time: serverTimestamp(),
+        time: Timestamp.now(),
       }),
     });
     setMessage("");
