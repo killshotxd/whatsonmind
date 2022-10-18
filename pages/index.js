@@ -47,21 +47,16 @@ export default function Home() {
           See what other people are saying :
         </h2>
         {!loading ? (
-          allPosts.map(
-            (post) => (
-              console.log(post),
-              (
-                <Message key={post.id} {...post}>
-                  <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
-                    <button className="border-2 rounded-full w-60 border-cyan-600">
-                      {post.comments?.length > 0 ? post.comments?.length : 0}{" "}
-                      Comments
-                    </button>
-                  </Link>
-                </Message>
-              )
-            )
-          )
+          allPosts.map((post) => (
+            <Message key={post.id} {...post}>
+              <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
+                <button className="border-2 rounded-full w-60 border-cyan-600">
+                  {post.comments?.length > 0 ? post.comments?.length : 0}{" "}
+                  Comments
+                </button>
+              </Link>
+            </Message>
+          ))
         ) : (
           <div className="flex items-center justify-center mx-auto h-80">
             <BounceLoader color="#06B6D4" />
