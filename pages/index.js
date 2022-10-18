@@ -5,6 +5,7 @@ import { db } from "../utils/Firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import { BounceLoader } from "react-spinners";
+import { RoughNotation } from "react-rough-notation";
 
 export default function Home() {
   // Create a state with all posts
@@ -43,9 +44,11 @@ export default function Home() {
       </Head>
 
       <div className="my-12 text-lg font-medium">
-        <h2 className="text-xl font-semibold border-cyan-300 border-b-2">
-          See what other people are saying :
-        </h2>
+        <RoughNotation type="highlight" color="#06B6D4" show={true}>
+          <h2 className="text-xl font-semibold border-cyan-300 border-b-2">
+            See what other people are saying :
+          </h2>
+        </RoughNotation>
         {!loading ? (
           allPosts.map((post) => (
             <Message key={post.id} {...post}>

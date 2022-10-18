@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { auth } from "../utils/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { RoughNotation } from "react-rough-notation";
 export default function Nav() {
   const [user, loading] = useAuthState(auth);
 
   return (
     <nav className="flex justify-between items-center py-10">
       <Link href="/">
-        <button className="text-lg font-medium">What is on your Mind?</button>
+        <RoughNotation type="underline" show={true} color="#06B6D4">
+          <button className="text-lg font-medium">What is on your Mind?</button>
+        </RoughNotation>
       </Link>
       <ul className="flex items-center gap-10">
         {!user && (
