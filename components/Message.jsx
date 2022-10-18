@@ -30,7 +30,7 @@ export default function Message({
       <div className="flex items-center gap-2">
         <img src={avatar} className="w-10 rounded-full" alt="avatar" />
         <h2>{userName}</h2>
-        <p className="text-sm ma">{times === "Invalid date" ? "" : times}</p>
+        <p className="text-sm ">{times === "Invalid date" ? "" : times}</p>
       </div>
 
       <div className="py-4">
