@@ -14,5 +14,3 @@ export default function Message({ children, avatar, userName, description }) {
     </div>
   );
 }
-
-// 1h36m
