@@ -31,7 +31,7 @@ export default function Details({ timeStamp }) {
     if (!message) {
       toast.error("Do not leave an empty message 🙄", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
+        autoClose: 2000,
       });
       return;
     }
@@ -47,7 +47,7 @@ export default function Details({ timeStamp }) {
     });
     toast.success("Comment added successfully...😊", {
       position: toast.POSITION.TOP_CENTER,
-      autoClose: 1500,
+      autoClose: 2000,
     });
     setMessage("");
   };

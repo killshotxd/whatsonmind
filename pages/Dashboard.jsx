@@ -18,6 +18,7 @@ import { BsTrash2Fill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 import Link from "next/link";
 import { BounceLoader } from "react-spinners";
+import { RoughNotation } from "react-rough-notation";
 
 export default function Dashboard() {
   const route = useRouter();
@@ -51,7 +52,11 @@ export default function Dashboard() {
   }, [user, loading]);
   return (
     <div>
-      <h1>Your posts</h1>
+      <RoughNotation type="highlight" color="#06B6D4" show={true}>
+        <h1 className="text-xl width-full font-medium flex justify-center align-center">
+          Your posts
+        </h1>
+      </RoughNotation>
       {!loader ? (
         <div>
           {posts.map((post) => {

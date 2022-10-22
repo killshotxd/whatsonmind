@@ -28,7 +28,7 @@ export default function Post() {
     if (!post.description) {
       toast.error("Description Field is empty 😅", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
+        autoClose: 2000,
       });
       return;
     }
@@ -36,7 +36,7 @@ export default function Post() {
     if (post.description.length > 300) {
       toast.error("Description too long 😅", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
+        autoClose: 2000,
       });
       return;
     }
@@ -47,7 +47,7 @@ export default function Post() {
       await updateDoc(docRef, updatedPost);
       toast.success("Post has been updated...😊", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
+        autoClose: 2000,
       });
       return route.push("/");
     } else {
@@ -63,7 +63,7 @@ export default function Post() {
       setPost({ description: "" });
       toast.success("Post has been made...😉", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
+        autoClose: 2000,
       });
       return route.push("/");
     }
