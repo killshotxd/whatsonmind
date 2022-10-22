@@ -45,8 +45,11 @@ export default function Details({ timeStamp }) {
         id: auth.currentUser.uid + Math.floor(Math.random() * 90 + 10),
       }),
     });
+    toast.success("Comment added successfully...😊", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1500,
+    });
     setMessage("");
-    console.log(routerData);
   };
 
   //Get Comments
